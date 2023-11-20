@@ -25,18 +25,20 @@ function dragEndListener (event) {
 interact('.dropzone').dropzone({
   // Require a 75% element overlap for a drop to be possible
   overlap: 0.5,
-
+  accept: '.drag-drop',
   // listen for drop related events:
 
   ondropactivate: function (event) {
     // add active dropzone feedback
     event.target.classList.add('drop-active')
+    // console.log(event.target);
   },
   ondragenter: function (event) {
-    var draggableElement = event.relatedTarget
-    var dropzoneElement = event.target
+    var draggableElement = event.relatedTarget;
+    var dropzoneElement = event.target;
 
     // feedback the possibility of a drop
+    console.log(dropzoneElement);
     dropzoneElement.classList.add('drop-target');
     draggableElement.classList.add('can-drop');
     // draggableElement.textContent = 'Dragged in';
@@ -67,11 +69,10 @@ interact('.drag-drop')
     inertia: true,
     modifiers: [
       interact.modifiers.restrictRect({
-        restriction: 'parent',
-        endOnly: true
+        // restriction: 'parent',
+        // endOnly: true
       })
     ],
     autoScroll: true,
-    // dragMoveListener from the dragging demo above
     listeners: { move: dragMoveListener, end: dragEndListener }
   })
